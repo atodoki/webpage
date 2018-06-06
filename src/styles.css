@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+/* 
+    Created on : Aug 29, 2017, 9:29:01 PM
+    Author     : arieltodoki
+*/
+body{
+	background-color:#FFDFDD;
+}
+h1 {
+	text-align: center;
+}
+h3 {
+	text-align: center;
+}
+
+a:link {
+	text-decoration: none;
+}
+a:hover {
+	color: pink;
+	text-decoration: none;
+}
+a:visited {
+	color: purple;
+}
