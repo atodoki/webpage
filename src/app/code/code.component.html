@@ -1,3 +1,36 @@
-<p>
-  code works!
-</p>
+<h1>Computer Science</h1>
+
+<div class="row">
+  <div class="col-xs-3">
+      <div *ngIf="githubUser | async; let githubUser; else loading">
+        <img 
+          [src]='githubUser.avatar_url'
+          alt="Github avatar"
+          class="img-fluid">
+      </div>
+      <ng-template #loading>
+        Ariel's Github
+      </ng-template>
+  </div>
+  <div class="col-xs-9">
+    <div class="d-flex flex-row flex-nowrap" style="overflow-x: scroll;">
+        <div
+          class="card text-black card-color mb-3"
+          style="min-width: 15rem;"
+          *ngFor="let item of githubRepoList | async">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">{{ item.description }}</p>
+            <div class="card-text" style="float:bottom">
+              <small class="muted">{{ item.updated_at | date }}
+                <em style="margin-left: 15px">{{ item.language }}</em>
+                <a [href]="item.html_url" target="_blank" class="muted" style="float:right">Visit me!</a>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<h3>Repositories</h3>
+
