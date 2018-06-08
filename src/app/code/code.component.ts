@@ -25,7 +25,12 @@ export class CodeComponent implements OnInit {
         language: string,
         updated_at: string
       }[]
-      >('https://api.github.com/users/atodoki/repos');
+      >('https://api.github.com/users/atodoki/repos').pipe(map((response) => {
+        response.sort((a: any, b: any) => {
+          return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+        });
+        return response;
+      }));
   }
 
 }
