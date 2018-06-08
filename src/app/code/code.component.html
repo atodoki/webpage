@@ -12,7 +12,8 @@
           class="img-fluid">
       </div>
       <ng-template #loading>
-        Ariel's Github
+        Check out my github:
+        <a href="https://github.com/atodoki" target="_blank">Click me!</a>
       </ng-template>
   </div>
   <div class="col-sm-9">
@@ -27,7 +28,9 @@
             <div class="card-text">
               <small class="muted">{{ item.updated_at | date }}
                 <em style="margin-left: 15px">{{ item.language }}</em>
-                <a [href]="item.html_url" target="_blank" style="display:block; float:right">Visit me!</a>
+                <a [href]="item.html_url" target="_blank" style="float:right">
+                  <img width="30px" alt="Github Logomark" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png">
+                </a>
               </small>
             </div>
           </div>
