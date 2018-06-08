@@ -1,7 +1,10 @@
 <h1>Computer Science</h1>
 
+<hr>
+
+<h3>Github Repositories</h3>
 <div class="row">
-  <div class="col-xs-3">
+  <div class="col-sm-3">
       <div *ngIf="githubUser | async; let githubUser; else loading">
         <img 
           [src]='githubUser.avatar_url'
@@ -12,7 +15,7 @@
         Ariel's Github
       </ng-template>
   </div>
-  <div class="col-xs-9">
+  <div class="col-sm-9">
     <div class="d-flex flex-row flex-nowrap" style="overflow-x: scroll;">
         <div
           class="card text-black card-color mb-3"
@@ -20,11 +23,11 @@
           *ngFor="let item of githubRepoList | async">
           <div class="card-body">
             <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">{{ item.description }}</p>
-            <div class="card-text" style="float:bottom">
+            <p class="card-text"> {{ item.description }}</p>
+            <div class="card-text">
               <small class="muted">{{ item.updated_at | date }}
                 <em style="margin-left: 15px">{{ item.language }}</em>
-                <a [href]="item.html_url" target="_blank" class="muted" style="float:right">Visit me!</a>
+                <a [href]="item.html_url" target="_blank" style="display:block; float:right">Visit me!</a>
               </small>
             </div>
           </div>
@@ -32,5 +35,4 @@
       </div>
   </div>
 </div>
-<h3>Repositories</h3>
 
