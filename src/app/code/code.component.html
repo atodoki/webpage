@@ -5,37 +5,37 @@
 <h3>Github Repositories</h3>
 <div class="row">
   <div class="col-sm-3">
-      <div *ngIf="githubUser | async; let githubUser; else loading">
+      <div *ngIf="githubUserImageUrl | async; let githubImg; else loading">
         <img 
-          [src]='githubUser.avatar_url'
+          [src]='githubImg'
           alt="Github avatar"
           class="img-fluid">
       </div>
       <ng-template #loading>
-        Check out my github:
+        Check out my Github:
         <a href="https://github.com/atodoki" target="_blank">Click me!</a>
       </ng-template>
   </div>
   <div class="col-sm-9">
     <div class="d-flex flex-row flex-nowrap" style="overflow-x: scroll;">
-        <div
-          class="card text-black card-color mb-3"
-          style="min-width: 15rem;"
-          *ngFor="let item of githubRepoList | async">
-          <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text"> {{ item.description }}</p>
-            <div class="card-text">
-              <small class="muted">{{ item.updated_at | date }}
-                <em style="margin-left: 15px">{{ item.language }}</em>
-                <a [href]="item.html_url" target="_blank" style="float:right">
-                  <img width="30px" alt="Github Logomark" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png">
-                </a>
-              </small>
-            </div>
+      <div
+        class="card text-black card-color mb-3"
+        style="min-width: 15rem;"
+        *ngFor="let item of githubRepoList | async">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.name }}</h5>
+          <p class="card-text"> {{ item.description }}</p>
+          <div class="card-text">
+            <small class="muted">{{ item.updated_at | date }}
+              <em style="margin-left: 15px">{{ item.language }}</em>
+              <a [href]="item.html_url" target="_blank" style="float:right">
+                <img width="30px" alt="Github Logomark" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png">
+              </a>
+            </small>
           </div>
         </div>
       </div>
+    </div>
   </div>
 </div>
 

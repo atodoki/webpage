@@ -10,6 +10,7 @@ import { CodeComponent } from './code/code.component';
 import { FluteComponent } from './flute/flute.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found.component';
+import { CodeService } from './code/code.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { NotFoundComponent } from './not-found.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [CodeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

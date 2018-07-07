@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { CodeService } from './code.service';
 
 @Component({
   selector: 'app-code',
@@ -10,27 +8,13 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./code.component.css']
 })
 export class CodeComponent implements OnInit {
-  githubUser: Observable<{avatar_url: string}>;
-  githubRepoList: Observable<{name: string, html_url: string}[]>;
+  githubUserImageUrl: Observable<string>;
+  githubRepoList: Observable<GithubRepoModel[]>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private codeService: CodeService) { }
 
   ngOnInit() {
-    this.githubUser = this.http.get<{avatar_url: string}>('https://api.github.com/users/atodoki');
-    this.githubRepoList = this.http.get<
-      {
-        name: string,
-        html_url: string,
-        description: string,
-        language: string,
-        updated_at: string
-      }[]
-      >('https://api.github.com/users/atodoki/repos').pipe(map((response) => {
-        response.sort((a: any, b: any) => {
-          return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
-        });
-        return response;
-      }));
+    this.githubUserImageUrl = this.codeService.getGithubUserImageUrl();
+    this.githubRepoList = this.codeService.getGithubRepoList();
   }
-
 }
