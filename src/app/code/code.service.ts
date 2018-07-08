@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { GithubRepoModel, LabMappingModel } from './code.models';
+import { GithubRepoModel, LabMappingModel, AppleAppModel } from './code.models';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
@@ -13,12 +13,27 @@ const GITHUB_API_REPO_URL = 'https://api.github.com/users/atodoki/repos';
 export const GITHUB_REPO_URL = 'https://github.com/atodoki';
 
 const LAB_CONTENTS_URL = '../assets/computer-graphics/contents.json';
+const MUSICAL_EAR_DATA_URL = 'https://itunes.apple.com/lookup?id=1378181191';
 
 @Injectable()
 export class CodeService {
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
+  /**
+   * Gets data about musical ear
+   */
+  getMusicalEarData(): Observable<AppleAppModel> {
+    return this.http.get<{results: AppleAppModel[]}>(MUSICAL_EAR_DATA_URL)
+      .pipe(map(
+        (data) => data.results[0]
+      )
+    );
+  }
+
+  /**
+   * Gets the lists mapping lab names to file names
+   */
   getComputerGraphicsList(): Observable<LabMappingModel[]> {
     return this.http.get<LabMappingModel[]>(LAB_CONTENTS_URL)
     .pipe(map(

@@ -2,15 +2,37 @@
 
 <hr />
 
-<h3>Computer Graphics</h3>
+<h3>Mobile App Development</h3>
+<br />
+<div *ngIf="musicalEarData | async; let musicalEar; else loadingMusicalEar">
+  <div class="d-flex flex-row" style="padding-bottom: 1%;">
+    <img [src]="musicalEar.artworkUrl100" style="padding-right: 1%;" />
+    <div class="d-flex flex-column justify-content-center">
+      <h3>{{musicalEar.trackName}}</h3>
+      <small>Version {{musicalEar.version}} | Released {{musicalEar.releaseDate | date: 'longDate'}}</small>
+      <a [href]="musicalEar.trackViewUrl" target="_blank" class="mt-auto">View in App Store</a>
+    </div>
+  </div>
+  <p>{{musicalEar.description}}</p>
+  <div class="d-flex flex-row" style="overflow-x: scroll;">
+    <img [src]="url" style="height: 400px; padding: 1% 1%" *ngFor="let url of musicalEar.screenshotUrls"/>
+  </div>
+</div>
+<ng-template #loadingMusicalEar>
+  <p>Loading...</p>
+</ng-template>
+<hr />
 
-<div class="d-flex flex-row" *ngIf="labs | async; let labList; else loadingLabs">
+<h3>Computer Graphics</h3>
+<br />
+
+<div class="d-flex flex-row" *ngIf="labList | async; let labs; else loadingLabs">
   <div class="d-flex flex-column">
     <ul class="list-group">
       <li
         class="list-group-item list-group-item-action"
         style="cursor: pointer;"
-        *ngFor="let lab of labList"
+        *ngFor="let lab of labs"
         (click)="onSelectedLab(lab)"
         [ngClass]="{'active': selectedLab === lab}">{{lab.name}}</li>
     </ul>
@@ -30,9 +52,11 @@
 <hr />
 
 <h3>Github Repositories</h3>
+<br />
+
 <div class="d-flex flex-row">
   <div *ngIf="githubUserImageUrl | async; let githubImg; else loadingGithub"
-    style="padding: 2% 2% 2% 2%;" >
+    style="padding: 0% 2%;" >
       <a [href]="repositoryLink" target="_blank">
         <img 
         [src]='githubImg'

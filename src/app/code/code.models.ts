@@ -11,3 +11,13 @@ export class GithubRepoModel {
 export class LabMappingModel {
   constructor(public name: string = null, public file: SafeResourceUrl = 'about:blank') {}
 }
+
+export class AppleAppModel {
+  artworkUrl100: string;
+  trackName: string;
+  version: string;
+  releaseDate: string;
+  trackViewUrl: string;
+  description: string;
+  screenshotUrls: string[];
+}
