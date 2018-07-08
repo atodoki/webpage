@@ -5,8 +5,9 @@ import { map, catchError } from 'rxjs/operators';
 
 const GITHUB_USER_IMAGE_STORAGE_KEY = 'githubImg';
 const GITHUB_REPO_STORAGE_KEY = 'githubRepos';
-const GITHUB_USER_IMAGE_URL = 'https://api.github.com/users/atodoki';
-const GITHUB_REPO_URL = 'https://api.github.com/users/atodoki/repos';
+const GITHUB_API_USER_IMAGE_URL = 'https://api.github.com/users/atodoki';
+const GITHUB_API_REPO_URL = 'https://api.github.com/users/atodoki/repos';
+export const GITHUB_REPO_URL = 'https://github.com/atodoki';
 
 @Injectable()
 export class CodeService {
@@ -17,7 +18,7 @@ export class CodeService {
    * Get the avatar url of the user
    */
   getGithubUserImageUrl(): Observable<string> {
-    return this.queryGithubApi<{avatar_url: string}>(GITHUB_USER_IMAGE_URL, GITHUB_USER_IMAGE_STORAGE_KEY)
+    return this.queryGithubApi<{avatar_url: string}>(GITHUB_API_USER_IMAGE_URL, GITHUB_USER_IMAGE_STORAGE_KEY)
     .pipe(map(
       (response) => response.avatar_url
     ));
@@ -27,7 +28,7 @@ export class CodeService {
    * Gets the repo info of the user
    */
   getGithubRepoList(): Observable<GithubRepoModel[]> {
-    return this.queryGithubApi<GithubRepoModel[]>(GITHUB_REPO_URL, GITHUB_REPO_STORAGE_KEY)
+    return this.queryGithubApi<GithubRepoModel[]>(GITHUB_API_REPO_URL, GITHUB_REPO_STORAGE_KEY)
       .pipe(map(
       (response) => {
         response.sort(

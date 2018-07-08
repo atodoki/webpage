@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CodeService } from './code.service';
+import { CodeService, GITHUB_REPO_URL } from './code.service';
 
 @Component({
   selector: 'app-code',
@@ -10,6 +10,8 @@ import { CodeService } from './code.service';
 export class CodeComponent implements OnInit {
   githubUserImageUrl: Observable<string>;
   githubRepoList: Observable<GithubRepoModel[]>;
+
+  repositoryLink = GITHUB_REPO_URL;
 
   constructor(private codeService: CodeService) { }
 
