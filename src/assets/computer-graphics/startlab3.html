@@ -1,0 +1,64 @@
+
+<!-- saved from url=(0063)http://willamette.edu/~atodoki/graphicsLabs/lab3/startlab3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><link rel="icon" type="image/x-icon" href="http://willamette.edu/~atodoki/graphicsLabs/lab3/favicon.png">
+    <script id="vertex-shader" type="x-shader/x-vertex">
+       attribute vec4 vPosition;
+       attribute vec4 vColor;
+       uniform   mat4 uProjection; // projection matrix
+       uniform   mat4 uModel_view; // model view matrix
+ 
+       varying vec4 color;
+            
+       void main() 
+       {
+           color = vColor;
+           gl_Position = uProjection * uModel_view * vPosition;
+       } 
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+
+        uniform vec4 uColor;
+
+        void
+        main()
+        {
+             gl_FragColor = uColor;
+        }
+    </script>
+
+    <script type="text/javascript" src="./startlab3_files/webgl-utils.js.download"></script>
+    <script type="text/javascript" src="./startlab3_files/initShaders.js.download"></script>
+    <script type="text/javascript" src="./startlab3_files/MV.js.download"></script>
+    
+ <!-- TO DO: ADD MATRIX STACK AND SHAPES-->
+    <script type="text/javascript" src="./startlab3_files/MatrixStack.js.download"></script>
+    
+    <script type="text/javascript" src="./startlab3_files/Cube.js.download"></script>
+    <script type="text/javascript" src="./startlab3_files/Cone.js.download"></script>
+    <script type="text/javascript" src="./startlab3_files/Cylinder.js.download"></script>
+    <script type="text/javascript" src="./startlab3_files/Disk.js.download"></script>
+    <script type="text/javascript" src="./startlab3_files/Train.js.download"></script>
+    
+    <script type="text/javascript" src="./startlab3_files/Shapes.js.download"></script>
+    <script type="text/javascript" src="./startlab3_files/render_scene.js.download"></script>
+
+    </head><body>
+
+        <h2> Lab 3: Transformations</h2>
+
+        <canvas id="gl-canvas" width="512" height="512">
+            Oops ... your browser doesn't support the HTML5 canvas element
+        </canvas>
+
+        <br>
+        
+        Key presses:
+        <br> A = rolls train backwards
+        <br> S = rolls train forwards
+        <br> D = reset train position
+
+    
+
+</body></html>

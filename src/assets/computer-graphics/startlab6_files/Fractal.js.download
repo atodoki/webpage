@@ -1,0 +1,140 @@
+/*
+ * Ariel Todoki
+ * Lab 6
+ * CS 445
+*/
+
+function Fractal(len, s) {
+    fractal = new FractalDEM(s);
+    
+    this.name = "fractal";
+    this.vertices = [];
+    this.colors = [];
+    this.normals = [];
+    
+    this.numVertices = 6* ((fractal.gridSize)*(fractal.gridSize));
+    this.numTriangles = 2 * ((fractal.gridSize)*(fractal.gridSize));
+
+
+    for (var n = 0; n < fractal.gridSize; n++) {
+        for (var m = 0; m < fractal.gridSize; m++) {
+            
+            //heights of 4 vertices used to create 2 triangles
+            h1 = fractal.heights[n][m];
+            h2 = fractal.heights[n][m + 1];
+            h3 = fractal.heights[n + 1][m + 1];
+            h4 = fractal.heights[n + 1][m];
+
+            var gridLen = len / fractal.gridSize;
+            var zPos = (gridLen*n) + (len / (-2));
+            var xPos = (gridLen*m) + (len / (-2));
+            
+            //vertex for 4 vertices used to create 2 triangles
+            v1 = vec4(xPos, h1, zPos, 1);
+            v2 = vec4(xPos + gridLen, h2, zPos, 1);
+            v3 = vec4(xPos + gridLen, h3, zPos + gridLen, 1);
+            v4 = vec4(xPos, h4, zPos + gridLen, 1);
+
+            //triangle 1
+            this.vertices.push(v1);
+            this.vertices.push(v2);
+            this.vertices.push(v3);
+
+            //triangle 2
+            this.vertices.push(v1);
+            this.vertices.push(v4);
+            this.vertices.push(v3);
+
+            //calculate normals for triangle 1
+            this.normals.push(calcNormal(n, m, gridLen, fractal));
+            this.normals.push(calcNormal(n, m+1, gridLen, fractal));
+            this.normals.push(calcNormal(n+1, m+1, gridLen, fractal));
+
+            //calculate normals for triangle 2
+            this.normals.push(calcNormal(n, m, gridLen, fractal));
+            this.normals.push(calcNormal(n+1, m, gridLen, fractal));
+            this.normals.push(calcNormal(n+1, m+1, gridLen, fractal));
+
+
+            //push colors for both triangles
+//            for (var c = 0; c < 6; c++) {
+//                this.colors.push(vec4(1, 0, 0, 1));
+//            }
+
+            //push colors for triangle 1
+            this.colors.push(getColor(h1));
+            this.colors.push(getColor(h2));
+            this.colors.push(getColor(h3));
+            
+            //push colors for triangle 2
+            this.colors.push(getColor(h1));
+            this.colors.push(getColor(h4));
+            this.colors.push(getColor(h3));
+
+        }
+    }
+}
+
+function calcNormal(n, m, gridLen, fractal) {
+    var h1 = fractal.getH(n - 1, m);
+    var h2 = fractal.getH(n + 1, m);
+    var h3 = fractal.getH(n, m - 1);
+    var h4 = fractal.getH(n, m + 1);
+
+    var pos1 = vec4((gridLen*m) + (fractal.gridSize / -2),h1,(gridLen*(n-1)) + (fractal.gridSize / -2),1);
+    var pos2 = vec4((gridLen*m) + (fractal.gridSize / -2),h2,(gridLen*(n+1)) + (fractal.gridSize / -2),1);
+    var pos3 = vec4((gridLen*(m-1)) + (fractal.gridSize / -2), h3, (gridLen*n) + (fractal.gridSize / -2),1);
+    var pos4 = vec4((gridLen*(m+1)) + (fractal.gridSize / -2),h4,(gridLen*n) + (fractal.gridSize / -2),1);
+
+    var vec1 = subtract(pos2, pos1);
+    var vec2 = subtract(pos4, pos3);
+
+    var norm = normalize(cross(vec1, vec2));
+    return vec4(norm[0],norm[1], norm[2], 0);
+}
+
+function getColor(h){
+    var blue = vec4(0,0,1,1);
+    var tan = vec4(.4,.4,.4,1);
+    var green = vec4(0,1,0,1);
+    var brown = vec4(.3,.3,.3,1);
+    var white = vec4(1,1,1,1);
+    
+    var blueN = 0;
+    var tanN = 0.01;
+    var greenN = 0.03;
+    var brownN = 0.4;
+    var whiteN = 0.5;
+    
+    if(h === blueN){
+        return blue;
+    }
+    else if(h === tanN){
+        return tan;
+    }
+    else if(h === greenN){
+        return green;
+    }
+    else if(h === brownN){
+        return brown;
+    }
+    else if(h >= whiteN){
+        return white;
+    }
+    else if(h > blueN && h < tanN){
+        return interpColor(blue, tan, h);
+    }
+    else if(h > tanN && h < greenN){
+        return interpColor(tan, green, h);
+    }
+    else if(h > greenN && h < brownN){
+        return interpColor(green, brown, h);
+    }
+    else if(h > brownN && h < whiteN){
+        return interpColor(brown, white, h);
+    }
+}
+
+function interpColor(a, b, h){
+    return vec4(a[0]+(b[0] - a[0])*h,a[1]+(b[1] - a[1])*h,a[2]+(b[2] - a[2])*h,1);
+}

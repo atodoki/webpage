@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { GithubRepoModel, LabMappingModel } from './code.models';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 const GITHUB_USER_IMAGE_STORAGE_KEY = 'githubImg';
 const GITHUB_REPO_STORAGE_KEY = 'githubRepos';
@@ -9,10 +12,24 @@ const GITHUB_API_USER_IMAGE_URL = 'https://api.github.com/users/atodoki';
 const GITHUB_API_REPO_URL = 'https://api.github.com/users/atodoki/repos';
 export const GITHUB_REPO_URL = 'https://github.com/atodoki';
 
+const LAB_CONTENTS_URL = '../assets/computer-graphics/contents.json';
+
 @Injectable()
 export class CodeService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
+
+  getComputerGraphicsList(): Observable<LabMappingModel[]> {
+    return this.http.get<LabMappingModel[]>(LAB_CONTENTS_URL)
+    .pipe(map(
+      (mappings) => {
+        mappings.forEach(mapping => {
+          mapping.file = this.sanitizer.bypassSecurityTrustResourceUrl('../assets/computer-graphics/' + mapping.file);
+        });
+        return mappings;
+      }
+    ));
+  }
 
   /**
    * Get the avatar url of the user

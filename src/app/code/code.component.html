@@ -2,21 +2,48 @@
 
 <hr />
 
+<h3>Computer Graphics</h3>
+
+<div class="d-flex flex-row" *ngIf="labs | async; let labList; else loadingLabs">
+  <div class="d-flex flex-column">
+    <ul class="list-group">
+      <li
+        class="list-group-item list-group-item-action"
+        style="cursor: pointer;"
+        *ngFor="let lab of labList"
+        (click)="onSelectedLab(lab)"
+        [ngClass]="{'active': selectedLab === lab}">{{lab.name}}</li>
+    </ul>
+  </div>
+  <iframe [src]="this.selectedLab.file" width="100%" height="700">
+    <span class="align-self-center">
+      Your browser does not support iframes. 
+      <a [href]="this.selectedLab.file" target="_blank">Open animation</a> in a new window.
+    </span>
+  </iframe>
+</div>
+<ng-template #loadingLabs>
+  <p>Loading...</p>
+</ng-template>
+
+<br />
+<hr />
+
 <h3>Github Repositories</h3>
 <div class="d-flex flex-row">
-      <div *ngIf="githubUserImageUrl | async; let githubImg; else loading"
-      style="padding: 2% 2% 2% 2%;" >
-        <a [href]="repositoryLink" target="_blank">
-          <img 
-          [src]='githubImg'
-          alt="Github avatar"
-          class="img-fluid" />
-        </a>
-      </div>
-      <ng-template #loading>
-        Check out my Github:
-        <a [href]="repositoryLink" target="_blank">Click me!</a>
-      </ng-template>
+  <div *ngIf="githubUserImageUrl | async; let githubImg; else loadingGithub"
+    style="padding: 2% 2% 2% 2%;" >
+      <a [href]="repositoryLink" target="_blank">
+        <img 
+        [src]='githubImg'
+        alt="Github avatar"
+        class="img-fluid" />
+      </a>
+    </div>
+    <ng-template #loadingGithub>
+      Check out my Github:
+      <a [href]="repositoryLink" target="_blank">Click me!</a>
+    </ng-template>
     <div class="d-flex flex-row flex-nowrap" style="overflow-x: scroll;">
       <div
         class="card text-black card-color mb-3"

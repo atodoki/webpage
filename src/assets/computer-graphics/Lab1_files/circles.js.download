@@ -1,0 +1,73 @@
+/* Ariel Todoki (worked on code by myself)
+ * 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+// Create variables
+var canvas;
+var rect;
+var ctx;
+var circles = [];
+
+// Define Circle class
+function Circle(){
+    this.rad = Math.floor(Math.random()*20)+1;
+    this.center = [];
+};
+
+// Draw filled circle on canvas with specified rgb color
+Circle.prototype.draw = function (r,g,b) {
+    ctx.beginPath();
+    ctx.arc(this.center[0],this.center[1],this.rad,0,2*Math.PI);
+    ctx.fillStyle = "rgb("+r+","+g+","+b+")";
+    ctx.fill();
+};
+
+// Upon loading the window, get handles for the canvas, add mouse listeners 
+window.onload = function init()
+{
+    canvas = document.getElementById("circle-canvas");
+    ctx = canvas.getContext("2d");
+    ctx.fillStyle = "rgb(200,250,250)";
+    ctx.fillRect(0,0,canvas.width, canvas.height);
+    
+    rect = canvas.getBoundingClientRect();
+    
+    canvas.addEventListener("mousedown", function (event){ 
+        if (event.button === 0){
+            var c = new Circle();
+            
+            // Find coordinates of center of circle from mouse click
+            centx = event.clientX - rect.left;
+            centy = event.clientY - rect.top;
+            c.center = [centx, centy];
+            
+            circles.push(c);
+            c.draw("0","0","0");
+            document.getElementById("cent-rad").innerHTML = "center=("+Math.round(c.center[0])+
+                ","+Math.round(c.center[1])+") radius="+c.rad ;   
+        }
+        else if (event.button === 2){
+            //Change color of circles to random colors
+            for (var index = 0; index < circles.length; index++){
+                
+                var r = Math.floor(Math.random()*255).toString();
+                var g = Math.floor(Math.random()*255).toString();
+                var b = Math.floor(Math.random()*255).toString();
+                
+                circles[index].draw(r,g,b);
+                  
+            }
+            
+        }
+        
+        // Set text for type of button in document
+        document.getElementById("button").innerHTML = "Button: "+ event.button;
+        
+    });
+
+};
+
+
