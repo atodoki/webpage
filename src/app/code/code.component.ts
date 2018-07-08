@@ -23,10 +23,15 @@ export class CodeComponent implements OnInit {
   ngOnInit() {
     this.githubUserImageUrl = this.codeService.getGithubUserImageUrl();
     this.githubRepoList = this.codeService.getGithubRepoList();
-
-    this.labList = this.codeService.getComputerGraphicsList();
     this.musicalEarData = this.codeService.getMusicalEarData();
+    this.labList = this.codeService.getComputerGraphicsList();
+
     this.selectedLab.file = this.sanitizer.bypassSecurityTrustResourceUrl(this.selectedLab.file.toString());
+    this.labList.subscribe(
+      (list) => {
+        this.selectedLab = list[0];
+      }
+    );
   }
 
   onSelectedLab(lab: LabMappingModel) {
