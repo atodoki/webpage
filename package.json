@@ -8,7 +8,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "npm run build && cd dist && git init && git add . && git commit -m \"Updated webpage\" && git push -u https://github.com/atodoki/atodoki.github.io.git master"
   },
   "private": true,
   "dependencies": {
