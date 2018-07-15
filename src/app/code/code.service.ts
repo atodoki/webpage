@@ -13,7 +13,10 @@ const GITHUB_API_REPO_URL = 'https://api.github.com/users/atodoki/repos';
 export const GITHUB_REPO_URL = 'https://github.com/atodoki';
 
 const LAB_CONTENTS_URL = '../assets/computer-graphics/contents.json';
-const MUSICAL_EAR_DATA_URL = 'https://itunes.apple.com/lookup?id=1378181191';
+
+const ITUNES_API_JSONP_CALLBACK_PARAM = 'callback';
+const MUSICAL_EAR_CALLBACK_METHOD = 'musicalEarItunesCallback';
+const MUSICAL_EAR_URL = `https://itunes.apple.com/lookup?id=1378181191&${ITUNES_API_JSONP_CALLBACK_PARAM}=${MUSICAL_EAR_CALLBACK_METHOD}`;
 
 @Injectable()
 export class CodeService {
@@ -24,7 +27,7 @@ export class CodeService {
    * Gets data about musical ear
    */
   getMusicalEarData(): Observable<AppleAppModel> {
-    return this.http.get<{results: AppleAppModel[]}>(MUSICAL_EAR_DATA_URL)
+    return this.http.jsonp<{results: AppleAppModel[]}>(MUSICAL_EAR_URL, ITUNES_API_JSONP_CALLBACK_PARAM)
       .pipe(map(
         (data) => data.results[0]
       )
