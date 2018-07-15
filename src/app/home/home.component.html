@@ -5,27 +5,34 @@
   </div>
 </div>
 <hr />
-<h2>Experience</h2>
-<ul class="list-group">
-  <li
-    class="list-group-item list-item-color"
-    *ngFor="let experience of experienceList">
-    <h4>{{experience.title}}</h4>
-    <p>{{experience.company}}</p>
-    <small>{{experience.startDate | date: 'MMM yyyy'}} - {{experience.endDate ? (experience.endDate | date: 'MMM yyyy') : 'Present'}}</small><br />
-    <small>{{experience.location}}</small><br /><br />
-    <p>{{experience.description}}</p>
-  </li>
-</ul>
-<hr />
-<h2>Education</h2>
-<ul class="list-group">
-  <li
-    class="list-group-item list-item-color"
-    *ngFor="let education of educationList">
-    <h4>{{education.name}}</h4>
-    <small>{{education.location}}</small><br />
-    <small>{{education.startDate | date: 'yyyy'}} - {{education.endDate ? (education.endDate | date: 'yyyy') : 'Present'}}</small>
-    <p>{{education.degree}}</p>
-  </li>
-</ul>
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Experience</h2>
+    <ul class="list-group">
+      <li
+        class="list-group-item list-item-color"
+        *ngFor="let experience of experienceList">
+        <h4>{{experience.title}}</h4>
+        <p>{{experience.company}}</p>
+        <small>{{experience.startDate | date: 'MMM yyyy'}} - {{experience.endDate ? (experience.endDate | date: 'MMM yyyy') : 'Present'}}</small><br />
+        <small>{{experience.location}}</small><br /><br />
+        <p>{{experience.description}}</p>
+      </li>
+    </ul>
+    <hr />
+  </div>
+  <div class="col-sm-6">
+    <h2>Education</h2>
+    <ul class="list-group">
+      <li
+        class="list-group-item list-item-color"
+        *ngFor="let education of educationList">
+        <h4>{{education.name}}</h4>
+        <small>{{education.location}}</small><br />
+        <small>{{education.startDate | date: 'yyyy'}} - {{education.endDate ? (education.endDate | date: 'yyyy') : 'Present'}}</small>
+        <p>{{education.degree}}</p>
+      </li>
+    </ul>
+    <hr />
+  </div>
+</div>
