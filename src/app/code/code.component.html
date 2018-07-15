@@ -27,7 +27,7 @@
 <br />
 
 <div class="row" *ngIf="labList | async; let labs; else loadingLabs">
-  <div class="col-sm-3">
+  <div class="col-lg-2">
       <ul class="list-group">
         <li
           class="list-group-item list-item-color list-group-item-action"
@@ -37,7 +37,7 @@
           [ngClass]="{'active': selectedLab === lab}">{{lab.name}}</li>
       </ul>
   </div>
-  <div class="col-sm-9">
+  <div class="col-lg-10">
     <iframe [src]="this.selectedLab.file" width="100%" height="700">
       <span class="align-self-center">
         Your browser does not support iframes. 

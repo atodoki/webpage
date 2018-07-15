@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
         degree: 'Master of Science, Computer Science and Systems'
       },
       {
-        name: 'Willamete University',
+        name: 'Willamette University',
         startDate: new Date(2014, 8),
         endDate: new Date(2018, 5),
         location: 'Salem, Oregon',
