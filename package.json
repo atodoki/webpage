@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "npm run build && cd dist && git init && git add . && git commit -m \"Updated webpage\" && git push -u https://github.com/atodoki/atodoki.github.io.git master"
+    "deploy": "cd dist && git init && git pull https://github.com/atodoki/atodoki.github.io.git master && cd .. && npm run build && cd dist && git add . && git commit -m \"Updated webpage\" && git push https://github.com/atodoki/atodoki.github.io.git master"
   },
   "private": true,
   "dependencies": {
