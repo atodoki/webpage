@@ -1,7 +1,7 @@
-/* 
-    Created on : Aug 29, 2017, 9:29:01 PM
-    Author     : arieltodoki
-*/
 body {
-	background-color:#FFDFDD;
+    background-color:#FFDFDD;
+}
+
+.list-item-color {
+    background-color: #ffc7c7;
 }
