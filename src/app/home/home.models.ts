@@ -1,3 +1,9 @@
+export class SocialMediaLink {
+  name: string;
+  link: string;
+  imgUrl: string;
+}
+
 export class Experience {
   title: string;
   company: string;

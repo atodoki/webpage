@@ -8,9 +8,11 @@
 
 <div *ngFor="let song of songList; let i = index">
   <h5>{{i+1}}. {{song.title}}</h5>
-  <h6><i>{{song.subtitle}}</i></h6>
-  <small>{{song.composer}}</small>
-  <ol>
-    <li *ngFor="let movement of song.movements">{{movement}}</li>
-  </ol>
+  <div [style.padding-left.px]="20">
+    <h6><i>{{song.subtitle}}</i></h6>
+    <small>{{song.composer}}</small>
+    <ol>
+      <li *ngFor="let movement of song.movements">{{movement}}</li>
+    </ol>
+  </div>
 </div>

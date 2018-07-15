@@ -1,18 +1,9 @@
 <div class="d-flex flex-row">
   <h1>Ariel Todoki</h1>
   <div class="ml-auto align-self-end">
-    <a href="https://www.linkedin.com/in/ariel-todoki-056376141/" target="_blank"><img src="https://www.linkedin.com/favicon.ico" alt="Linkedin" height="16px" /></a>
-    <a href="https://www.github.com/atodoki/" target="_blank"><img src="https://github.com/favicon.ico" alt="Github" height="16px" /></a>
-    <a href="https://www.facebook.com/atodoki/" target="_blank"><img src="https://www.facebook.com/favicon.ico" alt="Facebook" height="16px" /></a>
-    <a href="https://www.instagram.com/arietoki/" target="_blank"><img src="https://www.instagram.com/favicon.ico" alt="Instagram" height="16px" /></a>
-    <a href="https://www.youtube.com/user/arietoki" target="_blank"><img src="https://www.youtube.com/favicon.ico" alt="Youtube" height="16px" /></a>
-    <a href="https://www.pinterest.com/arietoki/" target="_blank"><img src="https://www.pinterest.com/favicon.ico" alt="Pinterest" height="16px" /></a>
-    <a href="https://www.arietoki.blogspot.com/" target="_blank"><img src="https://www.blogger.com/favicon.ico" alt="Blogspot" height="16px" /></a>
-    <a href="https://www.twitter.com/arie_toki/" target="_blank"><img src="https://www.twitter.com/favicon.ico" alt="Twitter" height="16px" /></a>
-    <a href="https://arietoki.tumblr.com/" target="_blank"><img src="https://www.tumblr.com/favicon.ico" alt="Tumblr" height="16px" /></a>
+    <a [href]="socialMedia.link" target="_blank" *ngFor="let socialMedia of socialMediaList"><img [src]="socialMedia.imgUrl" alt="socialMedia.name" height="16px" /></a>
   </div>
 </div>
-
 <hr />
 <h2>Experience</h2>
 <ul class="list-group">
@@ -21,7 +12,7 @@
     *ngFor="let experience of experienceList">
     <h4>{{experience.title}}</h4>
     <p>{{experience.company}}</p>
-    <small>{{experience.startDate | date: 'mediumDate'}} - {{experience.endDate | date: 'mediumDate'}}</small><br />
+    <small>{{experience.startDate | date: 'MMM yyyy'}} - {{experience.endDate ? (experience.endDate | date: 'MMM yyyy') : 'Present'}}</small><br />
     <small>{{experience.location}}</small><br /><br />
     <p>{{experience.description}}</p>
   </li>
@@ -34,7 +25,7 @@
     *ngFor="let education of educationList">
     <h4>{{education.name}}</h4>
     <small>{{education.location}}</small><br />
-    <small>{{education.startDate | date: 'yyyy'}} - {{education.endDate | date: 'yyyy'}}</small>
+    <small>{{education.startDate | date: 'yyyy'}} - {{education.endDate ? (education.endDate | date: 'yyyy') : 'Present'}}</small>
     <p>{{education.degree}}</p>
   </li>
 </ul>
