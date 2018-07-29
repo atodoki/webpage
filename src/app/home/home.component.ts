@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
       {
         name: 'Linkedin',
         link: 'https://www.linkedin.com/in/ariel-todoki-056376141/',
-        imgUrl: 'https://linkedin.com/favicon.ico',
+        imgUrl: 'https://www.linkedin.com/favicon.ico',
       },
       {
         name: 'Github',
@@ -28,12 +28,12 @@ export class HomeComponent implements OnInit {
       {
         name: 'Facebook',
         link: 'https://www.facebook.com/atodoki/',
-        imgUrl: 'https://facebook.com/favicon.ico',
+        imgUrl: 'https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico',
       },
       {
         name: 'Instagram',
         link: 'https://www.instagram.com/arietoki/',
-        imgUrl: 'https://instagram.com/favicon.ico',
+        imgUrl: 'https://www.instagram.com/static/images/ico/favicon.ico/36b3ee2d91ed.ico',
       },
       {
         name: 'Youtube',
@@ -43,17 +43,17 @@ export class HomeComponent implements OnInit {
       {
         name: 'Pinterest',
         link: 'https://www.pinterest.com/arietoki/',
-        imgUrl: 'https://pinterest.com/favicon.ico',
+        imgUrl: 'https://www.pinterest.com/favicon.ico',
       },
       {
         name: 'Blogspot',
         link: 'https://arietoki.blogspot.com/',
-        imgUrl: 'https://blogger.com/favicon.ico',
+        imgUrl: 'https://www.blogger.com/favicon.ico',
       },
       {
         name: 'Twitter',
         link: 'https://www.twitter.com/arie_toki/',
-        imgUrl: 'https://twitter.com/favicon.ico',
+        imgUrl: 'https://abs.twimg.com/favicons/favicon.ico',
       },
       {
         name: 'Tumblr',
